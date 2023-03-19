@@ -1,0 +1,35 @@
+* {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+#root {
+    width: 100vw;
+    height: 100vh;
+    background-color: #555;
+    background: radial-gradient(#555, black);
+    cursor: none;
+}
+
+#rightDrumstick {
+    width: 10px;
+    height: 200px;
+    background-color: #DEB887;
+    border-radius: 5px;
+    position: absolute;
+    transform-origin: top;
+    transform: rotate(-20deg);
+    z-index: 1;
+}
+
+#leftDrumstick {
+    width: 10px;
+    height: 200px;
+    background-color: #DEB887;
+    border-radius: 5px;
+    position: absolute;
+    transform-origin: top;
+    transform: rotate(20deg);
+    z-index: 1;
+}
