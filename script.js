@@ -1,18 +1,28 @@
 const root = document.getElementById('root');
+let widthVideo = 1280
+let heightVideo = 768
 
 // create video
 const video = document.createElement('video')
 video.id = "video"
-video.style = ` transform: scaleX(-1);`
+video.style = `
+    transform: scaleX(-1);
+    width: 100%;
+    height: 100%;
+`
 root.appendChild(video)
 
 // create canvas
 const canvas = document.createElement('canvas')
 canvas.id = "canvas"
+canvas.style = `
+    width: 100%;
+    height: 100%;
+`
 root.appendChild(canvas)
 
 const config = {
-    video: { width: 1024, height: 768, fps: 60 }
+    video: { width: widthVideo, height: heightVideo, fps: 144 }
 }
 
 async function initCamera(width, height, fps) {
@@ -49,8 +59,8 @@ async function main() {
     async function getHands() {
         const hands = await detector.estimateHands(video, { flipHorizontal: true })
         hands.map(hand => {
-            console.log(hand.handedness, hand.keypoints[0].x, hand.keypoints[0].y)
-            move(hand.keypoints[0].x, hand.keypoints[0].y, hand.handedness)
+            console.log(hand.handedness, (hand.keypoints[0].x / widthVideo) * window.screen.width, (hand.keypoints[0].y / heightVideo) * window.screen.height)
+            move((hand.keypoints[0].x / widthVideo) * window.screen.width, ((hand.keypoints[0].y / widthVideo) * window.screen.height) - 100, hand.handedness)
         })
         setTimeout(() => { getHands() }, 1000 / config.video.fps)
     }
@@ -61,7 +71,8 @@ window.addEventListener("DOMContentLoaded", () => {
     initCamera(config.video.width, config.video.height, config.video.fps)
         .then(video => {
             video.play()
-            video.addEventListener("loadeddata", () => {
+            video.addEventListener("loadeddata", (e) => {
+                console.log('e', e)
                 main()
             })
         })
@@ -88,7 +99,7 @@ const elements = [
         name: '',
         width: 100,
         height: 100,
-        x: 550,
+        x: window.screen.width / 2 - 100 - 80,
         y: 400,
         radius: 100,
         backgroundColor: '#fff',
@@ -98,18 +109,18 @@ const elements = [
         name: '',
         width: 100,
         height: 100,
-        x: 325,
-        y: 400,
-        radius: 100,
-        backgroundColor: '#fff',
-        sound: './assets/1.mp3',
-    },
-    {
-        name: '',
-        width: 100,
-        height: 100,
-        x: 437.5,
+        x: window.screen.width / 2 - 50 + 0,
         y: 350,
+        radius: 100,
+        backgroundColor: '#fff',
+        sound: './assets/1.mp3',
+    },
+    {
+        name: '',
+        width: 100,
+        height: 100,
+        x: window.screen.width / 2 - 0 + 80,
+        y: 400,
         radius: 100,
         backgroundColor: '#fff',
         sound: './assets/1.mp3',
@@ -118,7 +129,7 @@ const elements = [
         name: 'crash',
         width: 150,
         height: 150,
-        x: 625,
+        x: window.screen.width / 2 - 75 - 200,
         y: 200,
         radius: 150,
         backgroundColor: 'yellow',
@@ -128,7 +139,7 @@ const elements = [
         name: 'crash',
         width: 150,
         height: 150,
-        x: 200,
+        x: window.screen.width / 2 - 75 + 200,
         y: 200,
         radius: 150,
         backgroundColor: 'yellow',
@@ -138,7 +149,7 @@ const elements = [
         name: '',
         width: 200,
         height: 200,
-        x: 80,
+        x: window.screen.width / 2 - 100 - 350,
         y: 400,
         radius: 150,
         backgroundColor: 'lightgreen',
@@ -148,7 +159,7 @@ const elements = [
         name: '',
         width: 200,
         height: 200,
-        x: 500,
+        x: window.screen.width / 2 - 100 - 120,
         y: 510,
         radius: 150,
         backgroundColor: '#dff220',
@@ -159,7 +170,7 @@ const elements = [
         name: '',
         width: 200,
         height: 200,
-        x: 280,
+        x: window.screen.width / 2 - 100 + 120,
         y: 510,
         radius: 150,
         backgroundColor: '#dff220',
