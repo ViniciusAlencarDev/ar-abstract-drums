@@ -7,8 +7,8 @@ const video = document.createElement('video')
 video.id = "video"
 video.style = `
     transform: scaleX(-1);
-    width: 100%;
-    height: 100%;
+    width: 20%;
+    height: 20%;
 `
 root.appendChild(video)
 
@@ -60,7 +60,7 @@ async function main() {
         const hands = await detector.estimateHands(video, { flipHorizontal: true })
         hands.map(hand => {
             console.log(hand.handedness, (hand.keypoints[0].x / widthVideo) * window.screen.width, (hand.keypoints[0].y / heightVideo) * window.screen.height)
-            move((hand.keypoints[0].x / widthVideo) * window.screen.width, ((hand.keypoints[0].y / widthVideo) * window.screen.height) - 100, hand.handedness)
+            move((hand.keypoints[0].x / widthVideo) * window.screen.width, ((hand.keypoints[0].y / widthVideo) * window.screen.height), hand.handedness)
         })
         setTimeout(() => { getHands() }, 1000 / config.video.fps)
     }
@@ -100,81 +100,88 @@ const elements = [
         width: 100,
         height: 100,
         x: window.screen.width / 2 - 100 - 80,
-        y: 400,
+        y: 300,
         radius: 100,
         backgroundColor: '#fff',
-        sound: './assets/1.mp3',
+        sound: './assets/sounds/1.mp3',
+        image: './assets/images/1.png'
     },
     {
         name: '',
         width: 100,
         height: 100,
         x: window.screen.width / 2 - 50 + 0,
-        y: 350,
+        y: 250,
         radius: 100,
         backgroundColor: '#fff',
-        sound: './assets/1.mp3',
+        sound: './assets/sounds/1.mp3',
+        image: './assets/images/1.png'
     },
     {
         name: '',
         width: 100,
         height: 100,
         x: window.screen.width / 2 - 0 + 80,
-        y: 400,
+        y: 300,
         radius: 100,
         backgroundColor: '#fff',
-        sound: './assets/1.mp3',
+        sound: './assets/sounds/1.mp3',
+        image: './assets/images/1.png'
     },
     {
         name: 'crash',
         width: 150,
         height: 150,
         x: window.screen.width / 2 - 75 - 200,
-        y: 200,
+        y: 100,
         radius: 150,
         backgroundColor: 'yellow',
-        sound: './assets/2.mp3',
+        sound: './assets/sounds/2.mp3',
+        image: './assets/images/2.png'
     },
     {
         name: 'crash',
         width: 150,
         height: 150,
         x: window.screen.width / 2 - 75 + 200,
-        y: 200,
+        y: 100,
         radius: 150,
         backgroundColor: 'yellow',
-        sound: './assets/2.mp3',
+        sound: './assets/sounds/2.mp3',
+        image: './assets/images/2.png',
     },
     {
         name: '',
         width: 200,
         height: 200,
         x: window.screen.width / 2 - 100 - 350,
-        y: 400,
+        y: 300,
         radius: 150,
         backgroundColor: 'lightgreen',
-        sound: './assets/3.mp3',
+        sound: './assets/sounds/3.mp3',
+        image: './assets/images/3.png'
     },
     {
         name: '',
         width: 200,
         height: 200,
         x: window.screen.width / 2 - 100 - 120,
-        y: 510,
+        y: 410,
         radius: 150,
         backgroundColor: '#dff220',
-        sound: './assets/4.mp3',
-
+        sound: './assets/sounds/4.mp3',
+        image: './assets/images/4.png'
     },
     {
         name: '',
         width: 200,
         height: 200,
         x: window.screen.width / 2 - 100 + 120,
-        y: 510,
+        y: 410,
         radius: 150,
         backgroundColor: '#dff220',
-        sound: './assets/4.mp3',
+        sound: './assets/sounds/4.mp3',
+        image: './assets/images/4.png'
     }
 ]
 
